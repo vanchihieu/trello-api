@@ -1,13 +1,9 @@
-const MONGODB_URI =
-  "mongodb+srv://vanchihieu3:KPPnLY9EGEbIcYgk@cluster0-chihieudev.unhzc4t.mongodb.net/?retryWrites=true&w=majority";
-
-const DATABASE_NAME = "trello-chihieudev";
-
 import { MongoClient, ServerApiVersion } from "mongodb";
+import { env } from "./environment";
 
 let trelloDatabaseInstance = null;
 
-const mongoClientInstance = new MongoClient(MONGODB_URI, {
+const mongoClientInstance = new MongoClient(env.MONGODB_URI, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
@@ -21,7 +17,7 @@ export const CONNECT_DB = async () => {
     await mongoClientInstance.connect();
 
     // Kết nối thành công thì lấy ra Database theo tên và gán ngược nó lại cho biến trelloDatabaseInstance
-    trelloDatabaseInstance = mongoClientInstance.db(DATABASE_NAME);
+    trelloDatabaseInstance = mongoClientInstance.db(env.DATABASE_NAME);
     console.log("Connected successfully to server");
   } catch (error) {
     throw new Error("Connect failed", error);
