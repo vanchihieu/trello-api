@@ -13,6 +13,7 @@ const START_SERVER = () => {
 
   app.use("/v1", APIs_V1);
 
+  // Middleware xử lý lỗi tập trung trong ứng dụng 
   app.use(errorHandlingMiddleware);
 
   app.listen(env.APP_PORT, env.APP_HOST, () => {
