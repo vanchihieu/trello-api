@@ -1,15 +1,15 @@
 /* eslint-disable no-console */
 import { StatusCodes } from "http-status-codes";
-
+import ApiError from "~/utils/ApiError";
 const createNew = async (req, res, next) => {
   try {
     res.status(StatusCodes.CREATED).json({
       message: "Post: from controller APIs create new board",
     });
+
+    // throw new ApiError(StatusCodes.BAD_REQUEST, "Error from controller");
   } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-      errors: error.message,
-    });
+    next(error);
   }
 };
 
