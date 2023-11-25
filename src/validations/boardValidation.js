@@ -22,9 +22,6 @@ const createNew = async (req, res, next) => {
     // validate dữ liệu thành công thì chuyển sang middleware tiếp theo
     next();
 
-    res.status(StatusCodes.CREATED).json({
-      message: "Post: from validation APIs create new board",
-    });
   } catch (error) {
     // const errorMessage = new Error(error).message;
     // const customError = new ApiError(
