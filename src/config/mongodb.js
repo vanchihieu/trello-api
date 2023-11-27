@@ -28,6 +28,7 @@ export const CONNECT_DB = async () => {
 export const GET_DB = () => {
   if (!trelloDatabaseInstance)
     throw new Error("Must connect to Database first!");
+  return trelloDatabaseInstance;
 };
 
 export const CLOSE_DB = async () => {

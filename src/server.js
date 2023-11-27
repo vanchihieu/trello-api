@@ -8,12 +8,12 @@ import { errorHandlingMiddleware } from "./middlewares/errorHandlingMiddleware";
 
 const START_SERVER = () => {
   const app = express();
-
+  CONNECT_DB();
   app.use(express.json());
 
   app.use("/v1", APIs_V1);
 
-  // Middleware xử lý lỗi tập trung trong ứng dụng 
+  // Middleware xử lý lỗi tập trung trong ứng dụng
   app.use(errorHandlingMiddleware);
 
   app.listen(env.APP_PORT, env.APP_HOST, () => {
