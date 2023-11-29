@@ -2,6 +2,7 @@
 import Joi from "joi";
 import { StatusCodes } from "http-status-codes";
 import ApiError from "~/utils/ApiError";
+import { BOARD_TYPES } from "~/utils/constants";
 
 const createNew = async (req, res, next) => {
   const correctCondition = Joi.object({
@@ -13,6 +14,9 @@ const createNew = async (req, res, next) => {
       "any.required": "Title is a required field",
     }),
     description: Joi.string().required().min(3).max(100).trim().strict(),
+    type: Joi.string()
+      .valid(BOARD_TYPES.PUBLIC, BOARD_TYPES.PRIVATE)
+      .required(),
   });
 
   try {
@@ -21,7 +25,6 @@ const createNew = async (req, res, next) => {
 
     // validate dữ liệu thành công thì chuyển sang middleware tiếp theo
     next();
-
   } catch (error) {
     // const errorMessage = new Error(error).message;
     // const customError = new ApiError(
